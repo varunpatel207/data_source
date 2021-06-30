@@ -1,0 +1,22 @@
+# This is a same config.yml file
+# Create a copy of this file with filename = 'config.yml' and add your credentials in it
+# Warning: Don't commit the 'config.yml' file that you create!
+
+
+SECRET_KEY: enterYourDjangoSecretKeyHere
+BASE_URL: 'http://localhost:8000'
+EMAIL_USE_TLS: True
+EMAIL_HOST: 'smtp.mailtrap.io'
+EMAIL_PORT: 587
+EMAIL_HOST_USER: f3defac3ce867b
+EMAIL_HOST_PASSWORD: d530182c945e87
+FROM_EMAIL: 'Project Name <info@project.com>'
+HASHIDS_SALT: 'KzioAlnx2maXQHiDX9d4'
+POSTGRES_DB_CREDENTIALS:
+  DATABASE_NAME: enterYourDatabaseNameHere
+  USERNAME: enterYourDatabaseUsernameHere
+  PASSWORD: enterYourDatabasePasswordHere
+  HOST: localhost
+
+DEBUG: true
+LOG_FILE_PATH: 'logs/'

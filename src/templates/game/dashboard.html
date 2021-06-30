@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}
+Games
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Game</th>
+                    <th>Month</th>
+                    <th>Hours Streamed</th>
+                    <th>Hours Watched</th>
+                    <th>Peak Channels</th>
+                    <th>Peak Views</th>
+                    <th>Streamers</th>
+                    <th>Avg Viewers</th>
+                    <th>Avg Channels</th>
+                    <th>Avg Viewer Ratio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, game_data in game_data.items() %}
+                {%set game_object = game[game_data.game_id]%}
+                <tr>
+                    <td>{{ game_data.rank }}</td>
+                    <td><a href="{{url('game:game-info')}}?slug={{game_object.slug}}">{{ game_object.game }}</a></td>
+                    <td>{{ game_data.month }}/{{ game_data.year }}</td>
+                    <td>{{ game_data.hours_streamed }}</td>
+                    <td>{{ game_data.hours_watched }}</td>
+                    <td>{{ game_data.peak_channels }}</td>
+                    <td>{{ game_data.peak_viewers }}</td>
+                    <td>{{ game_data.streamers }}</td>
+                    <td>{{ game_data.avg_viewers }}</td>
+                    <td>{{ game_data.avg_channels }}</td>
+                    <td>{{ game_data.avg_viewer_ratio }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+
+{% block script %} {% endblock %}
