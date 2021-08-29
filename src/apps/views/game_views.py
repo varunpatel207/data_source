@@ -9,21 +9,13 @@ class GameViews:
     def dashboard(request):
         page = request.GET.get('page') or 0
 
-        if request.POST:
-            pass
-
         game_data_objects, game_data_count = GameData.game_filter(page=page)
-
-        print('game_data_objects')
-        print(game_data_objects)
 
         game_data_dict = {}
         game_dict = {}
         for game_data_object, game_object in game_data_objects:
             game_data_dict[game_data_object.id] = game_data_object
             game_dict[game_object.id] = game_object
-
-            print("game_data_object.game_id", game_data_object.game_id)
 
         context = {
             'game_data': game_data_dict,
@@ -35,6 +27,7 @@ class GameViews:
         slug = request.GET.get('slug')
 
         game_object = Game.get_by_slug(slug)
+        context = {'game_data': {}}
         if game_object:
             game_data_objects, count = GameData.search_game(game_id=game_object.id)
             print(game_data_objects)
@@ -44,14 +37,12 @@ class GameViews:
                 for game_data_object in game_data_objects:
                     game_data_dict[game_data_object.id] = object_as_dict(game_data_object)
 
-        context = {
-            'game_data': game_data_dict
-        }
+            context = {
+                'game_data': game_data_dict
+            }
         return render(request, 'game/game_info.html', context)
 
     def upload_game_data(request):
-        print('in here')
-
         if request.FILES:
             game_file = request.FILES.get('file')
 
@@ -81,8 +72,6 @@ class GameViews:
                                 setattr(game_object, key, game_dict[key])
                         game_object.add()
                     game_dict['game_id'] = game_object.id
-
-                    print('game_dict', game_dict)
 
                 game_data_object_list = []
                 for game_dict in game_data_list:
