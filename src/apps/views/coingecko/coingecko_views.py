@@ -36,14 +36,7 @@ class CoinGeckoViews:
 
     def get_all(request):
         context = {}
-
         crypto_history = CryptoPriceHistory.search()
-
-        print("*"*40)
-        print("crypto_history")
-        print(crypto_history)
-        print("*"*40)
-
         crypto_dict = {}
         history_dict = {}
         for history_object, crypto_object in crypto_history:
