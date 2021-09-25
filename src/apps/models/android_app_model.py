@@ -1,4 +1,4 @@
-from sqlalchemy import Column, BigInteger, Integer, Float, Text, String, Boolean
+from sqlalchemy import Column, BigInteger, Integer, Float, Text, String, Boolean, func
 
 from apps.models.base import session, BaseModel
 
@@ -32,3 +32,32 @@ class AndroidApp(BaseModel):
         session.bulk_save_objects(game_object_list)
         session.commit()
         return True
+
+    def search(self, **kwargs):
+        category = kwargs.get('category')
+        installs = kwargs.get('installs')
+        total_ratings = kwargs.get('total_ratings')
+        paid = kwargs.get('paid')
+
+        result_query = session.query(AndroidApp)
+        count_query = session.query(AndroidApp)
+
+        if category:
+            result_query = result_query.filter(AndroidApp.category == category)
+            count_query = count_query.filter(AndroidApp.category == category)
+
+        if installs:
+            result_query = result_query.filter(AndroidApp.installs >= installs)
+            count_query = count_query.filter(AndroidApp.installs >= installs)
+
+        if total_ratings:
+            result_query = result_query.filter(AndroidApp.total_ratings >= total_ratings)
+            count_query = count_query.filter(AndroidApp.total_ratings >= total_ratings)
+
+        if paid:
+            result_query = result_query.filter(AndroidApp.paid == paid)
+            count_query = count_query.filter(AndroidApp.paid == paid)
+
+        results = result_query.order_by(AndroidApp.id.desc()).limit().all()
+        total_count = count_query.order_by(AndroidApp.id.desc()).all()
+        return results, total_count

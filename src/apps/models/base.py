@@ -37,6 +37,10 @@ class BaseModel(Base, ActiveRecordMixin, ReprMixin):
     def get_by_id(cls, id):
         return session.query(cls).filter_by(id=id).first()
 
+    @classmethod
+    def get_by_slug(cls, slug):
+        return session.query(cls).filter_by(slug=slug).first()
+
     def add_update(self):
         session.add(self)
         session.commit()
@@ -46,5 +50,6 @@ class BaseModel(Base, ActiveRecordMixin, ReprMixin):
     def add(self):
         session.add(self)
         session.commit()
+        return self
 
 BaseModel.set_session(session)

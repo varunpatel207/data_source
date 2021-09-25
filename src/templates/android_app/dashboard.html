@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+Android Apps
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Title</th>
+                    <th>Total Ratings</th>
+                    <th>Installs</th>
+                    <th>Avg Rating</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, game_data in game_data.items() %}
+                {%set game_object = game[game_data.game_id]%}
+                <tr>
+                    <td>{{ game_data.rank }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+
+{% block script %} {% endblock %}

@@ -21,6 +21,8 @@ from twitch import settings
 import apps.models.game_data_model as game_data
 import apps.models.game_model as game
 import apps.models.android_app_model as android_app
+import apps.models.coingecko.crypto_model as crypto_model
+import apps.models.coingecko.crypto_price_history as crypto_price_history
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -56,7 +58,9 @@ def combine_metadata(*args):
     return m
 
 
-target_metadata = combine_metadata(game_data.BaseModel.metadata, game.BaseModel.metadata, android_app.BaseModel.metadata)
+target_metadata = combine_metadata(game_data.BaseModel.metadata, game.BaseModel.metadata,
+                                   android_app.BaseModel.metadata, crypto_model.BaseModel.metadata,
+                                   crypto_price_history.BaseModel.metadata)
 
 
 def run_migrations_offline():

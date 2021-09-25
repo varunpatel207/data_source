@@ -15,6 +15,12 @@ CONFIG_FILE = os.path.join(BASE_DIR, '../', 'config', 'config.yml')
 with open(CONFIG_FILE) as f:
     config_data = yaml.safe_load(f)
 
+COINMARKETCAP_API_URL = config_data['COINMARKETCAP']['API_URL']
+COINMARKETCAP_API_KEY = config_data['COINMARKETCAP']['API_KEY']
+
+COINGECKO_API_URL = config_data['COINGECKO']['API_URL']
+COINGECKO_API_KEY = config_data['COINGECKO']['API_KEY']
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config_data['SECRET_KEY']
 CONFIG = config_data

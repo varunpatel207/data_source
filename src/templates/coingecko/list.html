@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+Android Apps
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Crypto Id</th>
+                    <th>Price</th>
+                    <th>MCap</th>
+                    <th>MCap Rank</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, history_dict in crypto_history.items() %}
+                    {%set crypto_info = crypto[history_dict.crypto_id]%}
+                    <tr>
+                        <td>{{ crypto_info.name }}</td>
+                        <td>{{ history_dict.price }}</td>
+                        <td>{{ history_dict.market_cap }}</td>
+                        <td>{{ history_dict.rank }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+
+{% block script %} {% endblock %}
